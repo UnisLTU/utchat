@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 
 interface fireConfig {
@@ -23,11 +23,11 @@ const firebaseConfig: fireConfig  = {
     measurementId: "G-DK08EV963B"
   };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const db = getFirestore()
+const db = getFirestore(app)
 
-const auth = getAuth()
+const auth = getAuth(app)
 
 export {db, auth};
 
