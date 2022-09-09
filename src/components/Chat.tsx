@@ -1,45 +1,44 @@
+import { Unsubscribe } from "firebase/auth";
 import {
-  collection, limit, onSnapshot,
-  orderBy, query, QueryDocumentSnapshot
+  collection,
+  DocumentData,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
 } from "firebase/firestore";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { db } from "../utchat";
+import SendMessage from "./SendMessage";
 import SignOut from "./SignOut";
-  
-interface Massages {
-    id:string;
-    text:string;
-    time: Date;
-  }
-
-  interface Doc {
-    text:string;
-    time:Date;
-  }
 
 const Chat = () => {
-
-  const [messages, setMessages] = useState<Massages[]>([]);
+  const [messages, setMessages] = useState<DocumentData[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, 'messages'), orderBy('time'), limit(50));
-    const chatMessages = onSnapshot(q, (snapshot) => {
-      let messages: Massages[] = [];
-      snapshot.forEach((doc:any) => {
+    const q = query(collection(db, "messages"), orderBy("time"), limit(50));
+    const chatMessages: Unsubscribe = onSnapshot(q, (snapshot) => {
+      let messages: DocumentData[] = [];
+      snapshot.forEach((doc: any) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
-      console.log(messages);
-
     });
     return () => chatMessages();
   }, []);
 
-
   return (
     <div>
-      {messages && messages.map((message) => (<div key={message.id}>{message.text}</div>))}
       <SignOut />
+      {messages &&
+        messages.map(({ id, text, photoURL, displayName }) => (
+          <div key={id}>
+            <div>{displayName}</div>
+            <img src={photoURL} alt="profile"/>
+            <p>{text}</p>
+          </div>
+        ))}
+      <SendMessage />
     </div>
   );
 };
