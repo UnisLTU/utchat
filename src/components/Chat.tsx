@@ -7,12 +7,13 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { db } from "../utchat";
+import { useEffect, useState, useRef } from "react";
+import { auth, db } from "../utchat";
 import SendMessage from "./SendMessage";
 import SignOut from "./SignOut";
 
 const Chat = () => {
+  const scroll = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<DocumentData[]>([]);
 
   useEffect(() => {
@@ -30,15 +31,27 @@ const Chat = () => {
   return (
     <div>
       <SignOut />
-      {messages &&
-        messages.map(({ id, text, photoURL, displayName }) => (
-          <div key={id}>
-            <div>{displayName}</div>
-            <img src={photoURL} alt="profile"/>
-            <p>{text}</p>
-          </div>
-        ))}
-      <SendMessage />
+      <div className="outer_chat">
+        <div className="chat_box">
+          {messages &&
+            messages.map(({ id, text, photoURL, displayName, uid }) => (
+              <div>
+                <div
+                  key={id}
+                  className={`message ${
+                    uid === auth.currentUser?.uid ? "sent" : "received"
+                  }`}
+                >
+                  <img className="user_photo" src={photoURL} alt="profile" />
+                  <div className="username">{displayName}</div>
+                  <p className="text">{text}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+        <div ref={scroll}></div>
+      </div>
+      <SendMessage scroll={scroll} />
     </div>
   );
 };
