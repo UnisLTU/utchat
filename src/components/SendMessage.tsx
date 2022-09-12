@@ -4,10 +4,11 @@ import {
   FieldValue,
   serverTimestamp,
 } from "firebase/firestore";
-import React, { useState,forwardRef } from "react";
+import React, { useState } from "react";
 import { db, auth } from "../utchat";
+import { FiSend } from "react-icons/fi";
 
-const SendMessage = ({ scroll }) => {
+const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
 
   const setOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,28 +23,33 @@ const SendMessage = ({ scroll }) => {
 
   const sendMessage = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await addDoc(collection(db, "messages"), {
-      text: message,
-      photoURL,
-      uid,
-      time,
-      displayName,
-    });
-    setMessage("");
-    scroll.current?.scrollIntoView({ behavior: "smooth" });
+    if (message === "") {
+      setMessage("");
+    } else {
+      await addDoc(collection(db, "messages"), {
+        text: message,
+        photoURL,
+        uid,
+        time,
+        displayName,
+      });
+      setMessage("");
+    }
   };
 
   return (
     <div>
-      <form onSubmit={sendMessage}>
-        <div></div>
+      <form className="form_box" onSubmit={sendMessage}>
         <input
+          className="input_box"
           value={message}
           onChange={setOnChange}
           type="text"
           placeholder="Message..."
         />
-        <button type="submit">Send It!!!</button>
+        <button className="send_box" type="submit">
+          <FiSend style={{ verticalAlign: "middle", height: 25, width: 25 }} />
+        </button>
       </form>
     </div>
   );

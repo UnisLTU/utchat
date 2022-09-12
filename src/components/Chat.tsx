@@ -7,13 +7,13 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { auth, db } from "../utchat";
 import SendMessage from "./SendMessage";
 import SignOut from "./SignOut";
 
 const Chat = () => {
-  const scroll = useRef<HTMLDivElement>(null);
+  const scroll = useRef<HTMLDivElement | null>(null);
   const [messages, setMessages] = useState<DocumentData[]>([]);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const Chat = () => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
     });
     return () => chatMessages();
   }, []);
@@ -48,10 +49,10 @@ const Chat = () => {
                 </div>
               </div>
             ))}
+          <div ref={scroll}></div>
         </div>
-        <div ref={scroll}></div>
       </div>
-      <SendMessage scroll={scroll} />
+      <SendMessage />
     </div>
   );
 };
