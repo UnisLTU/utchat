@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { auth, db } from "../utchat";
 import SendMessage from "./SendMessage";
 import SignOut from "./SignOut";
+import Message from "./Message";
 
 const Chat = () => {
   const scroll = useRef<HTMLDivElement | null>(null);
@@ -29,13 +30,13 @@ const Chat = () => {
     return () => chatMessages();
   }, []);
 
+
   return (
     <div>
       <SignOut />
       <div className="outer_chat">
         <div className="chat_box">
-          {messages &&
-            messages.map(({ id, text, photoURL, displayName, uid }) => (
+          {messages.map(({ id, text, photoURL, displayName, uid }) => (
               <div>
                 <div
                   key={id}
@@ -45,7 +46,7 @@ const Chat = () => {
                 >
                   <img className="user_photo" src={photoURL} alt="profile" />
                   <div className="username">{displayName}</div>
-                  <p className="text">{text}</p>
+                  <Message text={text} uid={uid} id={id}/>
                 </div>
               </div>
             ))}

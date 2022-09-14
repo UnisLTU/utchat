@@ -1,8 +1,7 @@
 import React from "react";
 import { auth } from "../utchat";
 import { signOut } from "firebase/auth";
-import { VscSignOut } from 'react-icons/vsc'
-
+import { VscSignOut } from "react-icons/vsc";
 
 const SignOut = () => {
   const user: any = auth.currentUser;
@@ -21,7 +20,15 @@ const SignOut = () => {
         <span className="user_name">Sign as : {displayName}</span>
       </>
       <button className="signOutButton" onClick={signOutAuth}>
-        SIGN OUT <VscSignOut style={{ verticalAlign: 'middle', height: 20, width: 20, paddingLeft:6 }}/> 
+        SIGN OUT{" "}
+        <VscSignOut
+          style={{
+            verticalAlign: "middle",
+            height: 20,
+            width: 20,
+            paddingLeft: 6,
+          }}
+        />
       </button>
     </div>
   );

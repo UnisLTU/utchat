@@ -40,8 +40,8 @@
 }
 
 .signOutButton:hover {
-    transform: scale(1.05);
-    transition: ease-in-out 0.2s;
+  transform: scale(1.05);
+  transition: ease-in-out 0.2s;
 }
 
 .outer_chat {
@@ -67,7 +67,6 @@
 ::-webkit-scrollbar {
   display: none;
 }
-
 
 .message {
   display: flex;
@@ -120,8 +119,21 @@
   font-size: 12px;
   padding: 10px;
   overflow-wrap: break-word;
-  word-wrap:normal;
-  
+  word-wrap: normal;
+}
+
+.edit_button {
+  display: flex;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.pencil {
+  color: rgb(120, 120, 120);
+}
+
+.edit_button:hover > .pencil {
+  color: rgb(0, 0, 0);
 }
 
 .form_box {
@@ -160,6 +172,6 @@
 }
 
 .send_box:hover {
-    transform: scale(1.05);
-    transition: ease-in-out 0.2s;
+  transform: scale(1.05);
+  transition: ease-in-out 0.2s;
 }
