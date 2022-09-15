@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/utchat/static/css/main.7324e166.css",
-    "main.js": "/utchat/static/js/main.e2ec98cd.js",
+    "main.css": "/utchat/static/css/main.5548e652.css",
+    "main.js": "/utchat/static/js/main.5a79ca51.js",
     "index.html": "/utchat/index.html",
-    "main.7324e166.css.map": "/utchat/static/css/main.7324e166.css.map",
-    "main.e2ec98cd.js.map": "/utchat/static/js/main.e2ec98cd.js.map"
+    "main.5548e652.css.map": "/utchat/static/css/main.5548e652.css.map",
+    "main.5a79ca51.js.map": "/utchat/static/js/main.5a79ca51.js.map"
   },
   "entrypoints": [
-    "static/css/main.7324e166.css",
-    "static/js/main.e2ec98cd.js"
+    "static/css/main.5548e652.css",
+    "static/js/main.5a79ca51.js"
   ]
 }
