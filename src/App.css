@@ -440,6 +440,7 @@ h1 {
   .send_box {
     width: 20%;
     height: 120px;
+    border-radius: 0px;
   }
 
   .emoji-picker {
