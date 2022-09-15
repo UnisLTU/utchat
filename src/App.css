@@ -435,12 +435,12 @@ h1 {
     width: 60%;
     height: 120px;
     padding: 10px;
+    border-radius: 0px;
   }
 
   .send_box {
     width: 20%;
     height: 120px;
-    border-radius: 0px;
   }
 
   .emoji-picker {
