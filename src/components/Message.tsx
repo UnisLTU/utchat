@@ -42,6 +42,8 @@ const Message = ({ uid, text, id }: Props) => {
     setEdit((prev) => !prev)
   };
 
+  
+
 
   return (
     <>

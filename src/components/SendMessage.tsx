@@ -7,10 +7,13 @@ import {
 import React, { useState, useRef } from "react";
 import { db, auth } from "../utchat";
 import { FiSend } from "react-icons/fi";
+import Picker from "emoji-picker-react";
+import { HiOutlineEmojiHappy } from "react-icons/hi";
 
 const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
   const ref = useRef<HTMLInputElement | null>(null);
+  const [showPicker, setShowPicker] = useState(false);
 
   const setOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.currentTarget.value);
@@ -38,9 +41,21 @@ const SendMessage = () => {
     }
   };
 
+  const addEmoji = (e: React.SyntheticEvent, emoji: any) => {
+    setMessage(message + emoji.emoji);
+  };
+
+  const togglePicker = () => {
+    setShowPicker(!showPicker);
+  };
+
   return (
     <div>
       <form className="form_box" onSubmit={sendMessage}>
+        <div className="emoji-picker">
+          {showPicker && <Picker onEmojiClick={addEmoji} />}
+        </div>
+        <button className="emoji_button" onClick={togglePicker}><HiOutlineEmojiHappy style={{ verticalAlign: "middle", height: 45, width: 45 }}/></button>
         <input
           ref={ref}
           className="input_box"
@@ -49,6 +64,7 @@ const SendMessage = () => {
           type="text"
           placeholder="Message..."
         />
+
         <button className="send_box" type="submit">
           <FiSend style={{ verticalAlign: "middle", height: 25, width: 25 }} />
         </button>
