@@ -29,23 +29,24 @@ const Chat = () => {
     });
     return () => chatMessages();
   }, []);
-
+  
 
   return (
     <div>
       <SignOut />
       <div className="outer_chat">
         <div className="chat_box">
-          {messages.map(({ id, text, photoURL, displayName, uid }) => (
+          {messages.map(({ id, text, photoURL, displayName, uid, time}) => (
               <div>
                 <div
                   key={id}
                   className={`message ${
                     uid === auth.currentUser?.uid ? "sent" : "received"
                   }`}
-                >
+                > 
                   <img className="user_photo" src={photoURL} alt="profile" />
                   <div className="username">{displayName}</div>
+                  <div className="divider">|</div>
                   <Message text={text} uid={uid} id={id}/>
                 </div>
               </div>

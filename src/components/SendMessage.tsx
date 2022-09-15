@@ -4,12 +4,13 @@ import {
   FieldValue,
   serverTimestamp,
 } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { db, auth } from "../utchat";
 import { FiSend } from "react-icons/fi";
 
 const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
+  const ref = useRef<HTMLInputElement | null>(null);
 
   const setOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.currentTarget.value);
@@ -24,7 +25,7 @@ const SendMessage = () => {
   const sendMessage = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (message === "") {
-      setMessage("");
+      ref.current?.focus();
     } else {
       await addDoc(collection(db, "messages"), {
         text: message,
@@ -41,6 +42,7 @@ const SendMessage = () => {
     <div>
       <form className="form_box" onSubmit={sendMessage}>
         <input
+          ref={ref}
           className="input_box"
           value={message}
           onChange={setOnChange}

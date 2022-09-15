@@ -9,8 +9,8 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-      <button onClick={signInWithGoogle}>Sign In with Google</button>
+    <div className="LogIn">
+      <button className="LogIn_button" onClick={signInWithGoogle}>Sign In with Google</button>
     </div>
   );
 };
