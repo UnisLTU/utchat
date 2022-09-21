@@ -12,6 +12,7 @@ import { auth, db } from "../utchat";
 import SendMessage from "./SendMessage";
 import SignOut from "./SignOut";
 import Message from "./Message";
+import styles from "../styles/Chat.module.css"
 
 const Chat = () => {
   const scroll = useRef<HTMLDivElement | null>(null);
@@ -34,19 +35,19 @@ const Chat = () => {
   return (
     <div>
       <SignOut />
-      <div className="outer_chat">
-        <div className="chat_box">
+      <div className={styles.outer_chat}>
+        <div className={styles.chat_box}>
           {messages.map(({ id, text, photoURL, displayName, uid, time}) => (
               <div>
                 <div
                   key={id}
-                  className={`message ${
-                    uid === auth.currentUser?.uid ? "sent" : "received"
+                  className={`${styles.message} ${
+                    uid === auth.currentUser?.uid ? styles.sent : styles.received
                   }`}
                 > 
-                  <img className="user_photo" src={photoURL} alt="profile" />
-                  <div className="username">{displayName}</div>
-                  <div className="divider">|</div>
+                  <img className={styles.user_photo} src={photoURL} alt="profile" />
+                  <div className={styles.username}>{displayName}</div>
+                  <div className={styles.divider}>|</div>
                   <Message text={text} uid={uid} id={id}/>
                 </div>
               </div>

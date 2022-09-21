@@ -1,7 +1,7 @@
-import React from "react";
 import { auth } from "../utchat";
 import { signOut } from "firebase/auth";
 import { VscSignOut } from "react-icons/vsc";
+import styles from '../styles/SignOut.module.css'
 
 const SignOut = () => {
   const user: any = auth.currentUser;
@@ -10,16 +10,16 @@ const SignOut = () => {
 
   const signOutAuth = () => signOut(auth);
   return (
-    <div className="navbar">
+    <div className={styles.navbar}>
       <>
         <img
-          className="current_user_photo"
+          className={styles.current_user_photo}
           src={photoURL}
           alt="current_user_photo"
         ></img>
-        <span className="user_name">Sign as : {displayName}</span>
+        <span className={styles.user_name}>Sign as : {displayName}</span>
       </>
-      <button className="signOutButton" onClick={signOutAuth}>
+      <button className={styles.signOutButton} onClick={signOutAuth}>
         SIGN OUT{" "}
         <VscSignOut
           style={{

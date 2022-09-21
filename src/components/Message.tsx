@@ -4,8 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import {BiEdit} from 'react-icons/bi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import {BsCheckLg} from 'react-icons/bs'
-
-
+import styles from '../styles/Messages.module.css'
 
 
 interface Props {
@@ -49,21 +48,21 @@ const Message = ({ uid, text, id }: Props) => {
     <>
       {edit ? (
         <>
-          <p className="text">{text}</p>
+          <p className={styles.text}>{text}</p>
           {uid === auth.currentUser?.uid ? (
-            <button className="edit_message_button blue" id={id} onClick={handleEdit}>
+            <button className={styles.edit_message_button} id={id} onClick={handleEdit}>
               <BiEdit style={{height:"20", width:"20"}}/>
             </button>
           ) : null}
         </>
       ) : (
         <>
-          <form className="form" onSubmit={editMessage}>
+          <form className={styles.form} onSubmit={editMessage}>
             <input value={message} onChange={setOnChange} type="text" />
-            <div className="divider">|</div>
-            <button className="edit_message_button green" type="submit"><BsCheckLg style={{height:"18", width:"18"}}/></button>
-            <div className="divider">|</div>
-            <button className="edit_message_button red" onClick={cancelEdit}><AiFillCloseCircle style={{height:"18", width:"18"}}/></button>
+            <div className={styles.divider}>|</div>
+            <button className={`${styles.edit_message_button} ${styles.green}`}  type="submit"><BsCheckLg style={{height:"18", width:"18"}}/></button>
+            <div className={styles.divider}>|</div>
+            <button className={`${styles.edit_message_button} ${styles.red}`} onClick={cancelEdit}><AiFillCloseCircle style={{height:"18", width:"18"}}/></button>
           </form>
         </>
       )}

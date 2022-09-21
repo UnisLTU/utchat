@@ -9,6 +9,7 @@ import { db, auth } from "../utchat";
 import { FiSend } from "react-icons/fi";
 import Picker from "emoji-picker-react";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
+import styles from "../styles/SendMessage.module.css"
 
 const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
@@ -19,7 +20,7 @@ const SendMessage = () => {
     setMessage(e.currentTarget.value);
   };
 
-  const user: any = auth.currentUser;
+  const user: any | null = auth.currentUser;
   const displayName: string | null = user.displayName;
   const photoURL: string | null = user.photoURL;
   const uid: string | null = user.uid;
@@ -51,21 +52,21 @@ const SendMessage = () => {
 
   return (
     <div>
-      <form className="form_box" onSubmit={sendMessage}>
-        <div className="emoji-picker">
+      <form className={styles.form_box} onSubmit={sendMessage}>
+        <div className={styles.emoji_picker}>
           {showPicker && <Picker onEmojiClick={addEmoji} />}
         </div>
-        <button className="emoji_button" onClick={togglePicker}><HiOutlineEmojiHappy style={{ verticalAlign: "middle", height: 45, width: 45 }}/></button>
+        <button className={styles.emoji_button} onClick={togglePicker}><HiOutlineEmojiHappy style={{ verticalAlign: "middle", height: 45, width: 45 }}/></button>
         <input
           ref={ref}
-          className="input_box"
+          className={styles.input_box}
           value={message}
           onChange={setOnChange}
           type="text"
           placeholder="Message..."
         />
 
-        <button className="send_box" type="submit">
+        <button className={styles.send_box} type="submit">
           <FiSend style={{ verticalAlign: "middle", height: 25, width: 25 }} />
         </button>
       </form>
