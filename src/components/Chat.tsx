@@ -5,7 +5,7 @@ import {
   limit,
   onSnapshot,
   orderBy,
-  query,
+  query
 } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { auth, db } from "../utchat";
@@ -17,29 +17,28 @@ import styles from "../styles/Chat.module.css"
 const Chat = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [messages, setMessages] = useState<DocumentData[]>([]);
-
+  
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("time"), limit(50));
     const chatMessages: Unsubscribe = onSnapshot(q, (snapshot) => {
       let messages: DocumentData[] = [];
-      snapshot.forEach((doc: any) => {
+      snapshot.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
-      ref.current?.scrollIntoView({ behavior: "smooth" })
+      setTimeout(() => ref.current?.scrollIntoView(), 0)
     });
     return () => chatMessages();
   }, []);
-  
-  
 
+console.log(messages)
   return (
     <div>
       <SignOut />
       <div className={styles.outer_chat}>
         <div className={styles.chat_box}>
-          {messages.map(({ id, text, photoURL, displayName, uid, time}) => (
-              <div>
+          {messages.map(({ id, text, photoURL, displayName, uid}) => (
+              <div> 
                 <div
                   key={id}
                   className={`${styles.message} ${

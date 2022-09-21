@@ -1,18 +1,24 @@
-import './App.css';
-import Chat from './components/Chat';
-import SignIn from './components/SignIn';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../src/utchat'
-
+import "./App.css";
+import Chat from "./components/Chat";
+import SignIn from "./components/SignIn";
+import Loader from "./components/Loader";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../src/utchat";
+import { useState } from "react";
 
 const App = () => {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
+  const [loader, setLoader] = useState(true);
 
-  return (
-    <div>
-      {user ? <Chat/> : <SignIn/>}
-    </div>
+  setTimeout(() => {
+    setLoader(false);
+  }, 3000);
+
+  return loader ? (
+    <Loader />
+  ) : (
+    <div>{user ? <Chat /> : <SignIn />}</div>
   );
-}
+};
 
 export default App;
