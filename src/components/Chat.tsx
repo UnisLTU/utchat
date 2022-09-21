@@ -15,7 +15,7 @@ import Message from "./Message";
 import styles from "../styles/Chat.module.css"
 
 const Chat = () => {
-  const scroll = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [messages, setMessages] = useState<DocumentData[]>([]);
 
   useEffect(() => {
@@ -26,10 +26,11 @@ const Chat = () => {
         messages.push({ ...doc.data(), id: doc.id });
       });
       setMessages(messages);
-      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      ref.current?.scrollIntoView({ behavior: "smooth" })
     });
     return () => chatMessages();
   }, []);
+  
   
 
   return (
@@ -52,7 +53,7 @@ const Chat = () => {
                 </div>
               </div>
             ))}
-          <div ref={scroll}></div>
+          <div ref={ref}></div>
         </div>
       </div>
       <SendMessage />

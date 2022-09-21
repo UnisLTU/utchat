@@ -4,7 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import {BiEdit} from 'react-icons/bi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import {BsCheckLg} from 'react-icons/bs'
-import styles from '../styles/Messages.module.css'
+import styles from '../styles/Message.module.css'
 
 
 interface Props {

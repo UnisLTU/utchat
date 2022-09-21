@@ -9,7 +9,7 @@ import { db, auth } from "../utchat";
 import { FiSend } from "react-icons/fi";
 import Picker from "emoji-picker-react";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
-import styles from "../styles/SendMessage.module.css"
+import styles from "../styles/SendMessage.module.css";
 
 const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
@@ -51,12 +51,16 @@ const SendMessage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.form_container}>
+      <button className={styles.emoji_button} onClick={togglePicker}>
+        <HiOutlineEmojiHappy
+          style={{ verticalAlign: "middle", height: 45, width: 45 }}
+        />
+      </button>
+      <div className={styles.emoji_picker}>
+        {showPicker && <Picker onEmojiClick={addEmoji} />}
+      </div>
       <form className={styles.form_box} onSubmit={sendMessage}>
-        <div className={styles.emoji_picker}>
-          {showPicker && <Picker onEmojiClick={addEmoji} />}
-        </div>
-        <button className={styles.emoji_button} onClick={togglePicker}><HiOutlineEmojiHappy style={{ verticalAlign: "middle", height: 45, width: 45 }}/></button>
         <input
           ref={ref}
           className={styles.input_box}
@@ -65,7 +69,6 @@ const SendMessage = () => {
           type="text"
           placeholder="Message..."
         />
-
         <button className={styles.send_box} type="submit">
           <FiSend style={{ verticalAlign: "middle", height: 25, width: 25 }} />
         </button>
