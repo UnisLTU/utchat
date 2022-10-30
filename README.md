@@ -14,4 +14,3 @@ A simple chat website where you can chat in real time. It uses Firebase API to m
 - CSSModules
 - Typescript
 - Firebase
-- 
